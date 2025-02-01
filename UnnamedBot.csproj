@@ -9,8 +9,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02450" />
-    <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02450" />
+    <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02453" />
+    <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02453" />
   </ItemGroup>
 
 </Project>
