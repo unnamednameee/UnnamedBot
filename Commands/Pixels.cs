@@ -89,7 +89,7 @@ public class Pixels
             var mediaTypeAndExtension = mediaType.Split('/'); // [0] - type, [1] - extension
             return mediaTypeAndExtension[0] switch // checking media type without extension
             {
-                "image" => $"{(mediaTypeAndExtension[1] != "gif" ? "This image has" : "A frame in this GIF has")} {FormatPixelsCount(attachment)}",
+                "image" => $"{(mediaTypeAndExtension[1] != "gif" ? "This image has" : "A frame in this GIF has")} {FormatPixelsCount(attachment)}.",
                 "video" => $"A frame in this video has {FormatPixelsCount(attachment)}.",
                 _ => invalidFileResponse
             };
