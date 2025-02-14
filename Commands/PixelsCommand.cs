@@ -9,7 +9,7 @@ using DSharpPlus.Entities;
 
 namespace UnnamedBot.Commands;
 
-public class Pixels
+public class PixelsCommand
 {
     [Command("pixels"), Description("Count pixels in an attachment")]
     [InteractionInstallType(DiscordApplicationIntegrationType.UserInstall)]

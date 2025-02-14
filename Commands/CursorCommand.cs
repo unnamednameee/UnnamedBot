@@ -6,7 +6,7 @@ using DSharpPlus.Commands.ArgumentModifiers;
 namespace UnnamedBot.Commands;
 
 [Command("cursor"), Description("Interact with mouse cursor of the owner of this server")]
-public class Cursor
+public class CursorCommand
 {
     private const int MaxScreenX = 1920 - 1;
     private const int MaxScreenY = 1080 - 1;

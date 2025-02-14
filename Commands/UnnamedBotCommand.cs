@@ -1,12 +1,11 @@
 ﻿using System.ComponentModel;
-using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands.Metadata;
 using DSharpPlus.Entities;
 
 namespace UnnamedBot.Commands;
 
-public class UnnamedBotInfo
+public class UnnamedBotCommand
 {
     [Command("unnamedbot"), Description("Get information about unnamedbot")]
     [InteractionInstallType(DiscordApplicationIntegrationType.UserInstall)]
@@ -14,7 +13,7 @@ public class UnnamedBotInfo
     {
         await context.DeferResponseAsync();
 
-        string dspRepositoryLink = Formatter.MaskedUrl("DSharpPlus", new Uri("https://github.com/DSharpPlus/DSharpPlus"));
+        var dspRepositoryLink = "[DSharpPlus](https://github.com/DSharpPlus/DSharpPlus)";
         var embed = new DiscordEmbedBuilder()
             .WithAuthor(name: context.User.Username,
                         iconUrl: context.User.AvatarUrl)
