@@ -29,15 +29,15 @@ internal class Program
         var token = Environment.GetEnvironmentVariable("UNNAMEDBOT", EnvironmentVariableTarget.User);
         if (token is null)
         {
-            Console.WriteLine("you're stupid");
+            Console.WriteLine("Couldn't find bot's token. Provide it in the \"UNNAMEDBOT\" environment variable, then restart the program.");
             Environment.Exit(0);
         }
 
         var builder = DiscordClientBuilder.CreateDefault(token, DiscordIntents.AllUnprivileged);
         builder.UseCommands((IServiceProvider serviceProvider, CommandsExtension extension) =>
         {
-            extension.AddCommands([typeof(UnnamedBotInfo), typeof(Pixels)]);
-            extension.AddCommands([typeof(Cursor)], HomeGuildId);
+            extension.AddCommands([typeof(UnnamedBotCommand), typeof(PixelsCommand)]);
+            extension.AddCommands([typeof(CursorCommand)], HomeGuildId);
 
             extension.AddProcessor(new TextCommandProcessor(new TextCommandConfiguration()
             {
@@ -52,30 +52,30 @@ internal class Program
             UseDefaultCommandErrorHandler = false,
         });
 
-        Client = builder.Build();
-        await ConnectBotAsync();
+        await ConnectBotAsync(builder);
         await Task.Delay(-1);
     }
 
-    private static async Task ConnectBotAsync()
+    private static async Task ConnectBotAsync(DiscordClientBuilder builder, int connectAttempt = 0)
     {
-        if (Client is null)
-        {
-            Console.WriteLine("DiscordClient is not built. RIP");
-            return;
-        }
+        Client = builder.Build();
 
         try
         {
+            connectAttempt++;
             await Client.ConnectAsync();
             UptimeStopwatch.Start();
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.ToString());
-            Console.WriteLine("Failed to connect. Retrying in 10 seconds...");
-            await Task.Delay(10000);
-            await ConnectBotAsync();
+            Console.WriteLine($"Failed to connect. ({connectAttempt})");
+            if (connectAttempt <= 2)
+            {
+                Console.WriteLine("Retrying in 10 seconds...");
+                await Task.Delay(10000);
+                await ConnectBotAsync(builder, connectAttempt);
+            }
         }
     }
 
