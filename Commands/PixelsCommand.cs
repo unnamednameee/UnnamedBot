@@ -15,7 +15,6 @@ public class PixelsCommand
     [InteractionInstallType(DiscordApplicationIntegrationType.UserInstall)]
     public static async ValueTask ExecuteSlashCommandAsync(CommandContext context, [Description("Attachment to count pixels in")] DiscordAttachment attachment)
     {
-        await context.DeferResponseAsync();
         await context.RespondAsync(GetPixelsInAttachmentInfo(attachment));
     }
 
@@ -24,8 +23,6 @@ public class PixelsCommand
     [InteractionInstallType(DiscordApplicationIntegrationType.UserInstall)]
     public static async ValueTask ExecuteMessageCommandAsync(MessageCommandContext context, DiscordMessage message)
     {
-        await context.DeferResponseAsync();
-
         var attachments = message.Attachments;
         if (attachments.Count == 0)
         {
