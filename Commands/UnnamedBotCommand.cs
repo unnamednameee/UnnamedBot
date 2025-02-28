@@ -11,8 +11,6 @@ public class UnnamedBotCommand
     [InteractionInstallType(DiscordApplicationIntegrationType.UserInstall)]
     public static async ValueTask ExecuteAsync(CommandContext context)
     {
-        await context.DeferResponseAsync();
-
         var dspRepositoryLink = "[DSharpPlus](https://github.com/DSharpPlus/DSharpPlus)";
         var embed = new DiscordEmbedBuilder()
             .WithAuthor(name: context.User.Username,

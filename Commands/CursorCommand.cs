@@ -17,15 +17,12 @@ public class CursorCommand
         [Command("coords"), Description("Move mouse cursor of the owner of this server to specified coordinates")]
         public static async ValueTask CoordinatesAsync(CommandContext context, [MinMaxValue(0, MaxScreenX)] int x, [MinMaxValue(0, MaxScreenY)] int y)
         {
-            await context.DeferResponseAsync();
             await Do(context, x, y);
         }
 
         [Command("random"), Description("Move mouse cursor of the owner of this server to random coordinates")]
         public static async ValueTask RandomCoordinatesAsync(CommandContext context)
         {
-            await context.DeferResponseAsync();
-
             var random = new Random();
             int x = random.Next(MaxScreenX);
             int y = random.Next(MaxScreenY);
