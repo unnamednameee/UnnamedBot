@@ -57,9 +57,13 @@ public class PixelsCommand
     }
 
     private static int GetPixelsCount(DiscordAttachment attachment)
-        => attachment.Width is not null && attachment.Height is not null
-            ? (int)attachment.Width * (int)attachment.Height
+    {
+        int? width = attachment.Width;
+        int? height = attachment.Height;
+        return width is not null && height is not null
+            ? (int)width * (int)height
             : 0;
+    }
 
     // adds commas to big numbers (12345678 -> 12,345,678)
     private static string FormatWithCommas(int number)
